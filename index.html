@@ -1,323 +1,149 @@
 <!DOCTYPE html>
 <html lang="en">
 <head>
-  <meta charset="UTF-8">
-  <meta name="viewport" content="width=device-width, initial-scale=1.0">
-  <title>Abishek Raj S | Adaptive Portfolio</title>
-  <script src="https://cdn.tailwindcss.com"></script>
-  <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/6.4.0/css/all.min.css">
-  <link rel="preconnect" href="https://fonts.googleapis.com">
-  <link href="https://fonts.googleapis.com/css2?family=Plus+Jakarta+Sans:wght@300;400;500;600;700;800&display=swap" rel="stylesheet">
-  <link href="https://unpkg.com/aos@2.3.1/dist/aos.css" rel="stylesheet">
-  
-  <style>
-    * {
-      margin: 0;
-      padding: 0;
-      box-sizing: border-box;
-      transition: background-color 0.4s ease, border-color 0.4s ease, color 0.3s ease;
-    }
-    body {
-      font-family: 'Plus Jakarta Sans', sans-serif;
-    }
-    
-    /* Custom Smooth Animation Transitions */
-    .fade-in-card {
-      transition: transform 0.3s cubic-bezier(0.4, 0, 0.2, 1), box-shadow 0.3s ease;
-    }
-    
-    /* Global Smooth Theme Transition Overrides */
-    .theme-transition {
-      transition: all 0.4s cubic-bezier(0.4, 0, 0.2, 1);
-    }
-  </style>
-  <script>
-    // Tailwind Custom Configuration for Strict Light/Dark Class Logic
-    tailwind.config = {
-      darkMode: 'class',
-      theme: {
-        extend: {
-          colors: {
-            brandDarkBg: '#0b1329',      /* Deep Indigo Midnight */
-            brandDarkCard: '#1c2541',    /* Dark Sapphire Blue */
-            brandLightBg: '#f8fafc',     /* Smooth Clean Chalk */
-            brandLightCard: '#ffffff',   /* Pure White */
-            brandAccent: '#06b6d4'       /* Electric Teal */
-          }
-        }
-      }
-    }
-  </script>
+<meta charset="UTF-8">
+<meta name="viewport" content="width=device-width, initial-scale=1.0">
+<title>Abishek Raj S — AI Portfolio</title>
+<meta name="description" content="Abishek Raj S — B.Tech Artificial Intelligence student portfolio.">
+<script src="https://cdn.tailwindcss.com"></script>
+<link rel="preconnect" href="https://fonts.googleapis.com">
+<link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
+<link href="https://fonts.googleapis.com/css2?family=Inter:wght@400;500;600;700;800&family=Space+Grotesk:wght@500;600;700&display=swap" rel="stylesheet">
+<style>
+:root{--bg:#060816;--card:rgba(13,18,38,.68);--text:#f5f7ff;--muted:#9aa4bd;--line:rgba(148,163,184,.15);--a:#67e8f9;--b:#818cf8}
+*{box-sizing:border-box;scroll-behavior:smooth}
+body{margin:0;background:var(--bg);color:var(--text);font-family:Inter,sans-serif;overflow-x:hidden}
+h1,h2,h3,.brand{font-family:"Space Grotesk",sans-serif}
+#space{position:fixed;inset:0;z-index:-3;background:radial-gradient(circle at 50% 0%,rgba(99,102,241,.16),transparent 38%),#060816}
+.grid-bg{position:fixed;inset:0;z-index:-2;opacity:.35;background-image:linear-gradient(rgba(129,140,248,.07) 1px,transparent 1px),linear-gradient(90deg,rgba(129,140,248,.07) 1px,transparent 1px);background-size:55px 55px;mask-image:linear-gradient(to bottom,#000,transparent 85%)}
+.orb{position:fixed;border-radius:999px;filter:blur(70px);opacity:.18;z-index:-1;animation:float 12s ease-in-out infinite}
+.o1{width:280px;height:280px;background:#22d3ee;left:-80px;top:20%;}.o2{width:360px;height:360px;background:#6366f1;right:-120px;top:55%;animation-delay:-5s}
+@keyframes float{50%{transform:translate(35px,-45px) scale(1.08)}}
+.glass{background:var(--card);border:1px solid var(--line);backdrop-filter:blur(18px);-webkit-backdrop-filter:blur(18px);box-shadow:0 20px 70px rgba(0,0,0,.22)}
+.gradient{background:linear-gradient(100deg,#67e8f9,#818cf8,#c084fc);-webkit-background-clip:text;background-clip:text;color:transparent}
+.navlink{color:#aeb7cf;transition:.25s}.navlink:hover{color:#fff}
+.btn{transition:.25s}.btn:hover{transform:translateY(-3px);box-shadow:0 14px 35px rgba(103,232,249,.16)}
+.card{transition:.3s}.card:hover{transform:translateY(-7px);border-color:rgba(103,232,249,.35);box-shadow:0 25px 70px rgba(0,0,0,.3)}
+.reveal{opacity:0;transform:translateY(28px);transition:opacity .8s ease,transform .8s ease}.reveal.show{opacity:1;transform:none}
+.skillbar{height:7px;background:#1b2340;border-radius:20px;overflow:hidden}.skillbar span{display:block;height:100%;border-radius:20px;background:linear-gradient(90deg,#67e8f9,#818cf8)}
+.menu{display:none}
+@media(max-width:768px){.desktop-nav{display:none}.menu{display:block}}
+</style>
 </head>
-<body class="bg-brandLightBg text-slate-800 dark:bg-brandDarkBg dark:text-slate-100 theme-transition">
+<body>
+<canvas id="space"></canvas><div class="grid-bg"></div><div class="orb o1"></div><div class="orb o2"></div>
 
-  <nav class="fixed top-0 w-full bg-brandLightCard/90 dark:bg-brandDarkBg/90 backdrop-blur-md border-b border-slate-200 dark:border-slate-800 px-6 py-4 flex justify-between items-center z-50 shadow-sm">
-    <h1 class="text-xl md:text-2xl font-extrabold tracking-tight">
-      <span class="text-brandAccent">S.</span>
-      <span>ABISHEK RAJ</span>
-    </h1>
-    
-    <div class="flex items-center gap-6 font-semibold text-sm md:text-base">
-      <div class="hidden md:flex gap-6 items-center">
-        <a href="#about" class="hover:text-brandAccent transition-colors">About</a>
-        <a href="#certifications" class="hover:text-brandAccent transition-colors">Certifications</a>
-        <a href="#skills" class="hover:text-brandAccent transition-colors">Skills</a>
-        <a href="#projects" class="hover:text-brandAccent transition-colors">Projects</a>
-        <a href="#contact" class="hover:text-brandAccent transition-colors">Contact</a>
-      </div>
+<header class="fixed top-0 left-0 right-0 z-50 px-4 md:px-8 py-4">
+<nav class="max-w-6xl mx-auto glass rounded-2xl px-5 py-3 flex items-center justify-between">
+<a href="#home" class="brand text-lg font-bold tracking-tight"><span class="gradient">AR</span> <span class="text-white">/ PORTFOLIO</span></a>
+<div class="desktop-nav flex gap-7 text-sm font-semibold">
+<a class="navlink" href="#about">About</a><a class="navlink" href="#skills">Skills</a><a class="navlink" href="#projects">Projects</a><a class="navlink" href="#certifications">Certification</a><a class="navlink" href="#contact">Contact</a>
+</div>
+<button class="menu text-xl" onclick="document.getElementById('mobile').classList.toggle('hidden')">☰</button>
+</nav>
+<div id="mobile" class="hidden max-w-6xl mx-auto mt-2 glass rounded-2xl p-4 md:hidden">
+<div class="flex flex-col gap-4 text-sm font-semibold"><a href="#about">About</a><a href="#skills">Skills</a><a href="#projects">Projects</a><a href="#certifications">Certification</a><a href="#contact">Contact</a></div>
+</div>
+</header>
 
-      <button id="theme-toggle" class="w-12 h-12 rounded-full bg-slate-200 dark:bg-brandDarkCard text-amber-500 dark:text-cyan-400 flex items-center justify-center border border-slate-300 dark:border-slate-700 hover:scale-105 transition-transform" aria-label="Toggle Theme Mode">
-        <i id="theme-icon" class="fa-solid fa-moon text-lg"></i>
-      </button>
-    </div>
-  </nav>
+<main>
+<section id="home" class="min-h-screen flex items-center px-6 pt-28">
+<div class="max-w-6xl mx-auto w-full">
+<div class="max-w-4xl reveal">
+<div class="inline-flex items-center gap-2 glass rounded-full px-4 py-2 text-xs font-semibold text-cyan-200 mb-7"><span class="w-2 h-2 bg-cyan-300 rounded-full animate-pulse"></span> B.TECH ARTIFICIAL INTELLIGENCE • 2024—2028</div>
+<h1 class="text-5xl md:text-8xl font-bold leading-[.95] tracking-tight">Building <span class="gradient">intelligent</span><br>systems with code.</h1>
+<p class="mt-7 text-base md:text-xl text-slate-400 max-w-2xl leading-8">I'm Abishek Raj S — an Artificial Intelligence student focused on Python, automation, software logic and clean digital experiences.</p>
+<div class="flex flex-wrap gap-4 mt-9">
+<a href="#projects" class="btn rounded-xl px-6 py-3 bg-white text-slate-950 font-bold text-sm">View my work ↗</a>
+<a href="#contact" class="btn glass rounded-xl px-6 py-3 font-bold text-sm">Let's connect</a>
+</div>
+<div class="grid grid-cols-3 gap-4 max-w-xl mt-12">
+<div><div class="text-2xl font-bold">AI</div><div class="text-xs text-slate-500 mt-1">Core focus</div></div>
+<div><div class="text-2xl font-bold">Python</div><div class="text-xs text-slate-500 mt-1">Primary language</div></div>
+<div><div class="text-2xl font-bold">2028</div><div class="text-xs text-slate-500 mt-1">Graduation</div></div>
+</div>
+</div>
+</div>
+</section>
 
-  <section class="min-h-screen flex flex-col items-center justify-center px-6 pt-24 text-center relative overflow-hidden">
-    <div class="absolute inset-0 bg-gradient-to-tr from-brandAccent/5 to-transparent pointer-events-none"></div>
-    
-    <div class="max-w-4xl bg-brandLightCard dark:bg-brandDarkCard p-8 md:p-16 rounded-3xl shadow-xl border border-slate-200/60 dark:border-slate-800/80 z-10" data-aos="zoom-in" data-aos-duration="900">
-      <div class="inline-block px-4 py-1.5 rounded-full bg-brandAccent/10 text-brandAccent text-xs font-bold tracking-widest uppercase mb-6">
-        Software Engineer Portfolio
-      </div>
-      <h1 class="text-4xl md:text-7xl font-black mb-6 tracking-tight text-slate-900 dark:text-white">
-        Hi, I'm <span class="text-brandAccent">Abishek Raj S</span>
-      </h1>
-      <p class="text-lg md:text-2xl mb-8 font-medium text-slate-600 dark:text-slate-300">
-        B.Tech Artificial Intelligence Student • Specialist in Core Automation Processes
-      </p>
-      <p class="text-sm md:text-base leading-relaxed max-w-2xl mx-auto mb-10 text-slate-500 dark:text-slate-400">
-        Building optimal backends, structural data models, and adaptive automation software. Highly passionate about clean logic layers, script structures, and interface design patterns.
-      </p>
-      <div class="flex flex-wrap justify-center gap-5">
-        <a href="#projects" class="px-8 py-3.5 rounded-xl font-bold text-sm md:text-base tracking-wide text-white bg-brandAccent hover:bg-cyan-600 shadow-md shadow-brandAccent/20 transition-all duration-300 transform hover:-translate-y-0.5">
-          Explore Projects
-        </a>
-        <a href="#contact" class="px-8 py-3.5 rounded-xl font-bold text-sm md:text-base tracking-wide border border-slate-300 dark:border-slate-700 hover:bg-slate-100 dark:hover:bg-slate-800/50 transition-all duration-300 transform hover:-translate-y-0.5">
-          Contact Terminal
-        </a>
-      </div>
-    </div>
-  </section>
+<section id="about" class="py-28 px-6">
+<div class="max-w-6xl mx-auto">
+<div class="reveal mb-12"><p class="text-cyan-300 text-xs font-bold tracking-[.25em] uppercase">01 / About</p><h2 class="text-4xl md:text-6xl font-bold mt-3">Curious by nature.<br><span class="text-slate-500">Structured by design.</span></h2></div>
+<div class="grid md:grid-cols-5 gap-6">
+<div class="glass rounded-3xl p-8 md:col-span-3 reveal">
+<h3 class="text-2xl font-bold mb-5">A little about me</h3>
+<p class="text-slate-400 leading-8">I'm an enthusiastic computational designer and programmer dedicated to understanding software behaviour and building modular engineering workflows.</p>
+<p class="text-slate-400 leading-8 mt-5">My interests include script automation, structured testing, backend logic and front-end engineering. I enjoy turning complex ideas into reliable, understandable systems.</p>
+</div>
+<div class="glass rounded-3xl p-8 md:col-span-2 reveal">
+<p class="text-cyan-300 text-xs font-bold tracking-widest uppercase">Education</p>
+<h3 class="text-xl font-bold mt-5">SRM Institute of Science and Technology</h3>
+<p class="text-indigo-300 font-semibold mt-2">Kattankulathur, Chennai</p>
+<p class="text-slate-400 mt-4">B.Tech — Artificial Intelligence</p>
+<div class="mt-8 pt-5 border-t border-white/10 text-sm text-slate-500">2024 — 2028</div>
+</div>
+</div>
+</div>
+</section>
 
-  <section id="about" class="py-24 px-6 max-w-5xl mx-auto">
-    <div class="grid md:grid-cols-2 gap-8 items-stretch">
-      <div class="bg-brandLightCard dark:bg-brandDarkCard rounded-3xl p-8 border border-slate-200/60 dark:border-slate-800/80 shadow-md flex flex-col justify-between" data-aos="fade-right">
-        <div>
-          <h2 class="text-2xl font-extrabold mb-6 text-slate-900 dark:text-white border-b border-slate-200 dark:border-slate-800 pb-3">About Me</h2>
-          <p class="text-slate-600 dark:text-slate-300 text-sm md:text-base leading-relaxed mb-4">
-            Hello! I am Abishek Raj S, an enthusiastic computational designer and programmer dedicated to studying software behaviors and modular engineering workflows.
-          </p>
-          <p class="text-slate-600 dark:text-slate-300 text-sm md:text-base leading-relaxed">
-            I specialize in structured script testing, script automation development, and clean front-end engineering design. My goal is to craft reliable backend automation channels optimized for performance.
-          </p>
-        </div>
-      </div>
+<section id="skills" class="py-28 px-6">
+<div class="max-w-6xl mx-auto">
+<div class="reveal mb-12"><p class="text-cyan-300 text-xs font-bold tracking-[.25em] uppercase">02 / Skills</p><h2 class="text-4xl md:text-6xl font-bold mt-3">My technical<br><span class="text-slate-500">toolkit.</span></h2></div>
+<div class="grid md:grid-cols-3 gap-5">
+<div class="glass rounded-3xl p-7 card reveal"><div class="text-3xl mb-6">🐍</div><h3 class="text-xl font-bold">Python</h3><p class="text-slate-500 text-sm mt-2">Automation, algorithms, parsing and backend logic.</p><div class="mt-6 skillbar"><span style="width:78%"></span></div><p class="text-xs text-slate-500 mt-2">Intermediate</p></div>
+<div class="glass rounded-3xl p-7 card reveal"><div class="text-3xl mb-6">☕</div><h3 class="text-xl font-bold">Java OOP</h3><p class="text-slate-500 text-sm mt-2">Object-oriented fundamentals and structured programming.</p><div class="mt-6 skillbar"><span style="width:48%"></span></div><p class="text-xs text-slate-500 mt-2">Basic</p></div>
+<div class="glass rounded-3xl p-7 card reveal"><div class="text-3xl mb-6">⌘</div><h3 class="text-xl font-bold">HTML & CSS</h3><p class="text-slate-500 text-sm mt-2">Semantic structure, layouts and responsive interfaces.</p><div class="mt-6 skillbar"><span style="width:50%"></span></div><p class="text-xs text-slate-500 mt-2">Basic</p></div>
+</div>
+</div>
+</section>
 
-      <div class="bg-brandLightCard dark:bg-brandDarkCard rounded-3xl p-8 border border-slate-200/60 dark:border-slate-800/80 shadow-md flex flex-col justify-between" data-aos="fade-left">
-        <div>
-          <h2 class="text-2xl font-extrabold mb-6 text-slate-900 dark:text-white border-b border-slate-200 dark:border-slate-800 pb-3">Education Timeline</h2>
-          <h3 class="text-lg font-bold text-slate-900 dark:text-white">SRM Institute of Science and Technology</h3>
-          <p class="text-sm text-brandAccent font-semibold mb-2">Kattankulathur, Chennai</p>
-          <p class="text-slate-700 dark:text-slate-300 text-sm font-medium">B.Tech — Artificial Intelligence Department</p>
-        </div>
-        <div class="mt-6 pt-4 border-t border-slate-100 dark:border-slate-800/60 flex justify-between items-center text-xs text-slate-500">
-          <span class="font-bold bg-slate-100 dark:bg-slate-800 px-3 py-1.5 rounded-md text-brandAccent">Timeline: 2024 – 2028</span>
-          <span>Chennai, TN</span>
-        </div>
-      </div>
-    </div>
-  </section>
+<section id="projects" class="py-28 px-6">
+<div class="max-w-6xl mx-auto">
+<div class="reveal mb-12"><p class="text-cyan-300 text-xs font-bold tracking-[.25em] uppercase">03 / Projects</p><h2 class="text-4xl md:text-6xl font-bold mt-3">Things I've<br><span class="text-slate-500">built.</span></h2></div>
+<div class="grid md:grid-cols-2 gap-6">
+<article class="glass rounded-3xl p-8 card reveal"><div class="flex justify-between items-start"><span class="text-xs text-cyan-300 font-bold tracking-widest">01</span><span class="text-2xl">⚙️</span></div><h3 class="text-2xl font-bold mt-12">Process Sync Sandbox</h3><p class="text-slate-400 leading-7 mt-4">An optimization platform demonstrating thread allocations, mutex structures and concurrent data synchronization simulations.</p><div class="flex gap-2 mt-7"><span class="px-3 py-1 rounded-full bg-cyan-300/10 text-cyan-200 text-xs">Python</span><span class="px-3 py-1 rounded-full bg-white/5 text-slate-400 text-xs">Core Logic</span></div></article>
+<article class="glass rounded-3xl p-8 card reveal"><div class="flex justify-between items-start"><span class="text-xs text-indigo-300 font-bold tracking-widest">02</span><span class="text-2xl">🌱</span></div><h3 class="text-2xl font-bold mt-12">Climate Action Interface</h3><p class="text-slate-400 leading-7 mt-4">A responsive static metric platform designed to showcase environmental metric changes and sustainable design frameworks.</p><div class="flex gap-2 mt-7"><span class="px-3 py-1 rounded-full bg-indigo-300/10 text-indigo-200 text-xs">HTML5</span><span class="px-3 py-1 rounded-full bg-white/5 text-slate-400 text-xs">CSS3</span></div></article>
+</div>
+</div>
+</section>
 
-  <section id="certifications" class="py-24 px-6 bg-slate-100/50 dark:bg-slate-900/30">
-    <div class="max-w-5xl mx-auto">
-      <div class="text-center mb-12" data-aos="fade-up">
-        <i class="fa-solid fa-file-signature text-4xl text-brandAccent mb-4"></i>
-        <h2 class="text-3xl font-black text-slate-900 dark:text-white tracking-tight">Verified Credentials</h2>
-        <p class="text-slate-500 dark:text-slate-400 text-sm mt-2">Professional industry and technical course completions</p>
-      </div>
+<section id="certifications" class="py-28 px-6">
+<div class="max-w-6xl mx-auto">
+<div class="reveal mb-12"><p class="text-cyan-300 text-xs font-bold tracking-[.25em] uppercase">04 / Certification</p><h2 class="text-4xl md:text-6xl font-bold mt-3">Learning that<br><span class="text-slate-500">ships.</span></h2></div>
+<div class="glass rounded-3xl p-8 md:p-10 reveal max-w-3xl">
+<div class="flex flex-wrap justify-between gap-4"><div><p class="text-xs text-cyan-300 font-bold tracking-widest">CERTIFIED COURSE</p><h3 class="text-2xl font-bold mt-3">Python Programming</h3><p class="text-slate-400 mt-2">LIVEWIRE Core Training Services</p></div><div class="text-3xl">✓</div></div>
+<p class="text-slate-400 leading-7 mt-7">Completed programming-focused coursework covering algorithmic workflows, script structuring, logic blocks, data parsing and practical file manipulation.</p>
+<div class="flex flex-wrap justify-between gap-3 mt-7 pt-5 border-t border-white/10 text-xs text-slate-500"><span>Apr 2024 — Jun 2024</span><span>ID: CO240429Z935343</span></div>
+</div>
+</div>
+</section>
 
-      <div class="max-w-2xl mx-auto bg-brandLightCard dark:bg-brandDarkCard rounded-3xl p-6 md:p-8 border-2 border-brandAccent/30 shadow-lg" data-aos="fade-up">
-        <div class="flex flex-col md:flex-row justify-between items-start md:items-center gap-4 mb-6">
-          <div class="flex items-center gap-4">
-            <div class="w-12 h-12 rounded-xl bg-brandAccent/10 flex items-center justify-center text-brandAccent text-2xl">
-              <i class="fa-brands fa-python"></i>
-            </div>
-            <div>
-              <h3 class="text-xl font-extrabold text-slate-900 dark:text-white">Python Programming</h3>
-              <p class="text-xs text-slate-400">Issued by: <strong class="text-slate-600 dark:text-slate-300">LIVEWIRE Core Training Services</strong></p>
-            </div>
-          </div>
-          <span class="text-[10px] font-black bg-brandAccent text-white px-3 py-1.5 rounded-full uppercase tracking-wider shadow-sm">Verified Course</span>
-        </div>
-        <p class="text-slate-600 dark:text-slate-300 text-sm leading-relaxed">
-          Completed advanced algorithmic workflows and comprehensive script structuring modules. The certified curriculum focused extensively on programming foundations, logic blocks, data parsing, and practical file manipulations.
-        </p>
-        <div class="mt-6 pt-4 border-t border-slate-100 dark:border-slate-800 flex flex-wrap justify-between text-xs text-slate-400 gap-2">
-          <span>Duration: Apr 2024 - Jun 2024</span>
-          <span>ID: CO240429Z935343</span>
-        </div>
-      </div>
-    </div>
-  </section>
+<section id="contact" class="py-28 px-6">
+<div class="max-w-4xl mx-auto text-center glass rounded-[2rem] p-10 md:p-16 reveal">
+<p class="text-cyan-300 text-xs font-bold tracking-[.25em] uppercase">05 / Contact</p>
+<h2 class="text-4xl md:text-6xl font-bold mt-4">Let's build something<br><span class="gradient">meaningful.</span></h2>
+<p class="text-slate-400 mt-6 max-w-xl mx-auto leading-7">Open to academic collaborations, project discussions, automation ideas and opportunities to learn and build.</p>
+<div class="flex flex-wrap justify-center gap-4 mt-9">
+<a class="btn px-6 py-3 rounded-xl bg-white text-slate-950 font-bold text-sm" href="mailto:abishekraj258@gmail.com">Email me ↗</a>
+<a class="btn px-6 py-3 rounded-xl border border-white/10 bg-white/5 font-bold text-sm" href="https://github.com/abishekraj258" target="_blank" rel="noreferrer">GitHub ↗</a>
+</div>
+</div>
+</section>
+</main>
 
-  <section id="skills" class="py-24 px-6 max-w-5xl mx-auto">
-    <h2 class="text-3xl font-black mb-4 text-center text-slate-900 dark:text-white tracking-tight" data-aos="fade-up">Technical Framework</h2>
-    <p class="text-center text-slate-500 dark:text-slate-400 text-sm mb-12" data-aos="fade-up">Standard competency ratings indicating tech stack familiarity levels</p>
-    
-    <div class="grid sm:grid-cols-2 md:grid-cols-3 gap-6">
-      <div class="p-6 rounded-2xl bg-gradient-to-br from-brandAccent/10 to-brandAccent/5 border-2 border-brandAccent shadow-md flex flex-col justify-between" data-aos="flip-up">
-        <div>
-          <div class="flex items-center justify-between mb-4">
-            <div class="flex items-center gap-3">
-              <i class="fa-brands fa-python text-3xl text-brandAccent"></i>
-              <span class="text-xl font-black text-slate-900 dark:text-white">Python</span>
-            </div>
-            <span class="text-[10px] font-black bg-brandAccent text-white px-3 py-1 rounded-full uppercase tracking-widest">Intermediate</span>
-          </div>
-          <p class="text-xs text-slate-600 dark:text-slate-300 leading-relaxed">
-            Primary computing programming language used for script setups, algorithmic parsing loops, and backend structures.
-          </p>
-        </div>
-      </div>
+<footer class="border-t border-white/10 py-8 px-6">
+<div class="max-w-6xl mx-auto flex flex-col md:flex-row justify-between gap-3 text-xs text-slate-500"><span>© 2026 Abishek Raj S</span><span>Designed & built with curiosity.</span></div>
+</footer>
 
-      <div class="p-6 rounded-2xl bg-brandLightCard dark:bg-brandDarkCard border border-slate-200 dark:border-slate-800 shadow-sm flex flex-col justify-between fade-in-card hover:scale-[1.02]" data-aos="flip-up" data-aos-delay="100">
-        <div>
-          <div class="flex items-center justify-between mb-4">
-            <div class="flex items-center gap-3">
-              <i class="fa-brands fa-java text-3xl text-red-500"></i>
-              <span class="text-xl font-bold text-slate-900 dark:text-white">Java OOP</span>
-            </div>
-            <span class="text-[10px] font-black bg-slate-100 dark:bg-slate-800 text-slate-500 dark:text-slate-300 px-3 py-1 rounded-full uppercase tracking-widest border border-slate-200 dark:border-slate-700">Basic</span>
-          </div>
-          <p class="text-xs text-slate-500 dark:text-slate-400 leading-relaxed">
-            Familiar with object-oriented fundamentals, structural conditional layers, and basic syntax parameters.
-          </p>
-        </div>
-      </div>
-
-      <div class="p-6 rounded-2xl bg-brandLightCard dark:bg-brandDarkCard border border-slate-200 dark:border-slate-800 shadow-sm flex flex-col justify-between fade-in-card hover:scale-[1.02]" data-aos="flip-up" data-aos-delay="200">
-        <div>
-          <div class="flex items-center justify-between mb-4">
-            <div class="flex items-center gap-3">
-              <i class="fa-solid fa-code text-3xl text-amber-500"></i>
-              <span class="text-xl font-bold text-slate-900 dark:text-white">HTML5 & CSS3</span>
-            </div>
-            <span class="text-[10px] font-black bg-slate-100 dark:bg-slate-800 text-slate-500 dark:text-slate-300 px-3 py-1 rounded-full uppercase tracking-widest border border-slate-200 dark:border-slate-700">Basic</span>
-          </div>
-          <p class="text-xs text-slate-500 dark:text-slate-400 leading-relaxed">
-            Familiar with basic semantic page documentation structures and layout alignments.
-          </p>
-        </div>
-      </div>
-    </div>
-  </section>
-
-  <section id="projects" class="py-24 px-6 bg-slate-100/50 dark:bg-slate-900/30">
-    <div class="max-w-6xl mx-auto">
-      <h2 class="text-3xl font-black mb-4 text-center text-slate-900 dark:text-white tracking-tight" data-aos="fade-up">Engineering Repository</h2>
-      <p class="text-center text-slate-500 dark:text-slate-400 text-sm mb-16" data-aos="fade-up">A dynamic listing of current code repositories and automation blocks</p>
-
-      <div class="grid md:grid-cols-2 gap-8">
-        <div class="bg-brandLightCard dark:bg-brandDarkCard rounded-2xl p-8 border border-slate-200 dark:border-slate-800/80 shadow-md fade-in-card hover:-translate-y-1 transform duration-300 flex flex-col justify-between min-h-[220px]" data-aos="fade-up">
-          <div>
-            <div class="flex justify-between items-start mb-4">
-              <h3 class="text-xl font-extrabold text-slate-900 dark:text-white tracking-tight">Process Sync Sandbox</h3>
-              <i class="fa-solid fa-gears text-brandAccent text-xl"></i>
-            </div>
-            <p class="text-slate-600 dark:text-slate-300 text-sm leading-relaxed mb-6">
-              An optimization platform demonstrating basic thread allocations, mutex structures, and concurrent data synchronization simulations.
-            </p>
-          </div>
-          <div class="flex items-center gap-3">
-            <span class="text-[10px] font-bold tracking-wider text-brandAccent bg-brandAccent/10 px-2.5 py-1 rounded-md uppercase">Python</span>
-            <span class="text-[10px] font-bold tracking-wider text-slate-400 bg-slate-100 dark:bg-slate-800 px-2.5 py-1 rounded-md uppercase">Core Logic</span>
-          </div>
-        </div>
-
-        <div class="bg-brandLightCard dark:bg-brandDarkCard rounded-2xl p-8 border border-slate-200 dark:border-slate-800/80 shadow-md fade-in-card hover:-translate-y-1 transform duration-300 flex flex-col justify-between min-h-[220px]" data-aos="fade-up" data-aos-delay="100">
-          <div>
-            <div class="flex justify-between items-start mb-4">
-              <h3 class="text-xl font-extrabold text-slate-900 dark:text-white tracking-tight">Climate Action Interface</h3>
-              <i class="fa-solid fa-leaf text-emerald-500 text-xl"></i>
-            </div>
-            <p class="text-slate-600 dark:text-slate-300 text-sm leading-relaxed mb-6">
-              A responsive static metric platform designed to showcase environmental metric changes and sustainable design frameworks.
-            </p>
-          </div>
-          <div class="flex items-center gap-3">
-            <span class="text-[10px] font-bold tracking-wider text-brandAccent bg-brandAccent/10 px-2.5 py-1 rounded-md uppercase">HTML5</span>
-            <span class="text-[10px] font-bold tracking-wider text-emerald-500 bg-emerald-500/10 px-2.5 py-1 rounded-md uppercase">CSS3</span>
-          </div>
-        </div>
-      </div>
-    </div>
-  </section>
-
-  <section id="contact" class="py-24 px-6 max-w-4xl mx-auto text-center">
-    <div class="bg-brandLightCard dark:bg-brandDarkCard rounded-3xl p-8 md:p-16 border border-slate-200 dark:border-slate-800 shadow-xl" data-aos="zoom-in">
-      <h2 class="text-3xl font-black text-slate-900 dark:text-white tracking-tight mb-4">Connect Terminal</h2>
-      <p class="text-slate-500 dark:text-slate-400 max-w-md mx-auto text-sm md:text-base mb-10">
-        Available for academic collaborations, script testing groups, or direct professional project evaluations.
-      </p>
-      
-      <div class="flex flex-wrap justify-center gap-4">
-        <a href="mailto:abishekraj258@gmail.com" class="px-6 py-3 rounded-xl font-bold text-sm bg-brandAccent text-white hover:bg-cyan-600 transition flex items-center gap-2 shadow-sm">
-          <i class="fa-solid fa-envelope"></i> Email Channel
-        </a>
-        <a href="https://github.com/abishekraj258" target="_blank" class="px-6 py-3 rounded-xl font-bold text-sm bg-slate-800 dark:bg-slate-700 text-white hover:bg-slate-900 dark:hover:bg-slate-600 transition flex items-center gap-2 shadow-sm">
-          <i class="fa-brands fa-github"></i> GitHub Profile
-        </a>
-      </div>
-    </div>
-  </section>
-
-  <footer class="bg-slate-200 dark:bg-slate-950 py-12 text-center border-t border-slate-300 dark:border-slate-900">
-    <div class="max-w-6xl mx-auto px-6 flex flex-col md:flex-row justify-between items-center gap-6">
-      <div class="text-left">
-        <p class="font-extrabold text-lg text-slate-900 dark:text-white tracking-tight">© 2026 ABISHEK RAJ S</p>
-        <p class="text-xs text-brandAccent font-medium mt-1">Computational Systems Student • Professional Portfolio</p>
-      </div>
-      <div class="flex gap-4">
-        <a href="mailto:abishekraj258@gmail.com" class="w-10 h-10 rounded-full bg-brandLightCard dark:bg-brandDarkCard border border-slate-300 dark:border-slate-800 flex items-center justify-center hover:text-brandAccent dark:hover:text-brandAccent shadow-sm transition">
-          <i class="fa-solid fa-envelope"></i>
-        </a>
-        <a href="https://github.com/abishekraj258" target="_blank" class="w-10 h-10 rounded-full bg-brandLightCard dark:bg-brandDarkCard border border-slate-300 dark:border-slate-800 flex items-center justify-center hover:text-brandAccent dark:hover:text-brandAccent shadow-sm transition">
-          <i class="fa-brands fa-github"></i>
-        </a>
-      </div>
-    </div>
-  </footer>
-
-  <script src="https://unpkg.com/aos@2.3.1/dist/aos.js"></script>
-  <script>
-    // Initialize Scroll Animations
-    try {
-      AOS.init({
-        duration: 800,
-        once: true
-      });
-    } catch(e) {
-      console.warn("AOS failed to run:", e);
-    }
-
-    // Light / Dark Theme Switching Logic Engine
-    const toggleBtn = document.getElementById('theme-toggle');
-    const themeIcon = document.getElementById('theme-icon');
-    const htmlEl = document.documentElement;
-
-    // Default to Dark Mode configuration on load
-    htmlEl.classList.add('dark');
-    themeIcon.className = 'fa-solid fa-sun text-lg';
-
-    toggleBtn.addEventListener('click', () => {
-      if (htmlEl.classList.contains('dark')) {
-        htmlEl.classList.remove('dark');
-        themeIcon.className = 'fa-solid fa-moon text-lg';
-      } else {
-        htmlEl.classList.add('dark');
-        themeIcon.className = 'fa-solid fa-sun text-lg';
-      }
-    });
-  </script>
+<script>
+const canvas=document.getElementById("space"),ctx=canvas.getContext("2d");
+let w,h,dpr,particles=[];
+function resize(){dpr=Math.min(devicePixelRatio||1,2);w=innerWidth;h=innerHeight;canvas.width=w*dpr;canvas.height=h*dpr;canvas.style.width=w+"px";canvas.style.height=h+"px";ctx.setTransform(dpr,0,0,dpr,0,0);particles=Array.from({length:Math.min(120,Math.floor(w/11))},()=>({x:Math.random()*w,y:Math.random()*h,r:Math.random()*1.5+.2,v:Math.random()*.35+.08,a:Math.random()*.55+.15}))}
+function draw(){ctx.clearRect(0,0,w,h);for(const p of particles){p.y-=p.v;if(p.y<0){p.y=h;p.x=Math.random()*w}ctx.beginPath();ctx.arc(p.x,p.y,p.r,0,Math.PI*2);ctx.fillStyle=`rgba(170,220,255,${p.a})`;ctx.fill()}requestAnimationFrame(draw)}
+addEventListener("resize",resize);resize();draw();
+const io=new IntersectionObserver(es=>es.forEach(e=>{if(e.isIntersecting)e.target.classList.add("show")}),{threshold:.12});
+document.querySelectorAll(".reveal").forEach(e=>io.observe(e));
+document.querySelectorAll("#mobile a").forEach(a=>a.addEventListener("click",()=>document.getElementById("mobile").classList.add("hidden")));
+</script>
 </body>
 </html>
